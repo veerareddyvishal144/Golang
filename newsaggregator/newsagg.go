@@ -23,7 +23,7 @@ type NewsItem struct{
 }
 
 func main(){
-res,_:=http.Get("https://newsapi.org/v1/articles?source=cnn&apiKey=d5af3160c2cb45dcb4fea791e0c24f9f");
+res,_:=http.Get("https://newsapi.org/v1/articles?source=cnn&apiKey=****");
 bytes,_:=ioutil.ReadAll(res.Body);
 
 
