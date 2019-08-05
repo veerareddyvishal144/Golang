@@ -4,9 +4,14 @@ import ("fmt"
 "net/http" 
 "io/ioutil"
 "encoding/json"
-"strings"
-)
 
+)
+type News struct{
+	SortBy string
+	Status string
+	Source string
+	Articles []NewsItem
+}
 type NewsItem struct{
  Author string
  Title string
@@ -20,15 +25,13 @@ type NewsItem struct{
 func main(){
 res,_:=http.Get("https://newsapi.org/v1/articles?source=cnn&apiKey=d5af3160c2cb45dcb4fea791e0c24f9f");
 bytes,_:=ioutil.ReadAll(res.Body);
-var s string =strings.Split(string(bytes), "[")[1];
-var p string =strings.Split(s,"]")[0];
-var z string="["+p[0:]+"]";
-
-var xs []NewsItem;
- json.Unmarshal([]byte(z),&xs);
 
 
-fmt.Printf("%+v",xs[0].Author);
+var xs News;
+ json.Unmarshal(bytes,&xs);
+
+
+fmt.Printf("%+v",xs);
 
 res.Body.Close();
 
